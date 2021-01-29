@@ -9,7 +9,7 @@ const PopularCocktails = (props) => {
     return (
         <div onClick={onClick}>
             <h2>{props.item.strDrink}</h2>
-            <img src={props.item.strDrinkThumb}/>
+            <img src={props.item.strDrinkThumb} alt={props.item.strDrink}/>
         </div>
     )
 }
