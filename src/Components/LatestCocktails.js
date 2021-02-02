@@ -1,7 +1,30 @@
 import React, { useState, useEffect } from "react";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API_KEY } from "../secret/Key";
+import styled from "styled-components";
+const StyledDiv = styled.div`
+text-align: center;
+  h2 {
+    color: blue;
+  }
+  img {
+    height: 15rem;
+    width: 15rem;
+    margin:2.5%;
+  }
+  p{
+    margin:5%;
+  }
+
+  ul{
+    background-color:black;
+    color:red;
+    padding:2%;
+    
+  }
+`
+
 const LatestCocktails = (props) => {
   const [latest, setLatest] = useState([]);
   const { id } = useParams();
@@ -19,18 +42,23 @@ const LatestCocktails = (props) => {
       });
   }, []);
 
-  console.log(latest);
+
 
   return (
     <div>
       {latest.map((item, idx) => {
         return (
-          <div key={idx}>
+          <StyledDiv key={idx}>
             <h2>{item.strDrink}</h2>
-            <span>Category: {item.strCategory}</span>
-            <span>{item.strAlcoholic}</span>
+            <div>
+              <img src={item.strDrinkThumb} alt={item.strDrink} />
+            </div>
+
+            <p>Category: {item.strCategory}</p>
+            <p>{item.strAlcoholic}</p>
             <p>{item.strGlass}</p>
-            <ol>
+
+            <ul>
               <h3>Ingredients</h3>
               {item.strIngredient1 === null || "" ? (
                 <div></div>
@@ -107,8 +135,9 @@ const LatestCocktails = (props) => {
               ) : (
                 <li>{item.strIngredient15}</li>
               )}
-            </ol>
-          </div>
+            </ul>
+            <p>{item.strInstructions}</p>
+          </StyledDiv>
         );
       })}
     </div>

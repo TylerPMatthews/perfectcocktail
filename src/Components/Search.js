@@ -3,7 +3,7 @@ import axios from "axios";
 import { API_KEY } from "../secret/Key";
 import SearchedCocktail from "./SearchedCocktail";
 
-const Home = () => {
+const Search = () => {
   const [formValues, setFormValues] = useState("");
   const [search, setSearched] = useState([]);
 
@@ -23,7 +23,7 @@ const Home = () => {
   };
   const randomCocktail = (e) => {
     axios
-      .get(`https://www.thecocktaildb.com/api/json/v1/${API_KEY}/random.php`)
+      .get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/random.php`)
       .then((res) => {
         e.preventDefault();
         setSearched(res.data.drinks);
@@ -57,11 +57,16 @@ const Home = () => {
             name="name"
           />
         </label>
-        <button>Create Cocktail</button>
-        <button onClick={clearSearched}>Clear Cocktail</button>
-      </form>
 
+        <button>Create Cocktail</button>
+        {search.length === 0 ? (
+          <div></div>
+        ) : (
+          <button onClick={clearSearched}>Clear</button>
+        )}
+      </form>
       <button onClick={randomCocktail}>Random Cocktail</button>
+
       <div>
         {search.map((item, idx) => {
           return <SearchedCocktail item={item} key={idx} />;
@@ -70,4 +75,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default Search;
