@@ -1,5 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+    img{
+        width:13rem;
+        height:13rem;
+    }
+`
 
 const PopularCocktails = (props) => {
     const {push} = useHistory();
@@ -7,10 +15,10 @@ const PopularCocktails = (props) => {
         push(`/popular/${props.item.idDrink}`)
     }
     return (
-        <div onClick={onClick}>
+        <StyledDiv onClick={onClick}>
             <h2>{props.item.strDrink}</h2>
             <img src={props.item.strDrinkThumb} alt={props.item.strDrink}/>
-        </div>
+        </StyledDiv>
     )
 }
 export default PopularCocktails;

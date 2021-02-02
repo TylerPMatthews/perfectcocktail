@@ -2,6 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import {API_KEY} from '../secret/Key';
 import PopularCocktails from "./PopularCocktails";
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  button{
+    background-color:blue;
+    color:white;
+    text-align:center;
+    padding:1.5%;
+    border-radius:15px;
+  }
+
+`
 const GrabPopular = () => {
   const [popDrinks, setPopDrinks] = useState([]);
 
@@ -21,17 +33,17 @@ const GrabPopular = () => {
     setPopDrinks([]);
   };
   return (
-    <div>
+    <StyledDiv>
       <div>
         <h3>Popular Cocktail's</h3>
         <button onClick={grabPopularDrinks}>Popular</button>
-        <button onClick={clearPopular}>Clear Popular</button>
+        {(popDrinks.length !== 0) ? <button onClick={clearPopular}>Clear Popular</button> : <div></div>}
       </div>
       <div>  {popDrinks.map((item, idx) => {
         return <PopularCocktails item={item} key={idx} />;
       })}</div>
     
-    </div>
+    </StyledDiv>
   );
 };
 export default GrabPopular;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Welcome from "./Components/Welcome";
-import Home from "./Components/Home";
+import Home from "./Components/Search";
 import Header from './Components/Header/Header';
 import { Route, Switch} from "react-router-dom";
 import LatestCocktails from "./Components/LatestCocktails";

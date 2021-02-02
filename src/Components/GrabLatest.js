@@ -2,6 +2,18 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import LatestCocktailsMap from './LatestCocktailsMap';
 import { API_KEY } from "../secret/Key";
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  button{
+    background-color:blue;
+    color:white;
+    text-align:center;
+    padding:1.5%;
+    border-radius:15px;
+  }
+
+`
 const GrabLatest = () => {
     const [latestDrinks, setLatestDrinks] = useState([])
     const grabCocktail = () => {
@@ -20,17 +32,17 @@ const GrabLatest = () => {
         setLatestDrinks([])
     }
     return(
-        <div>
+        <StyledDiv>
             <h3>Latest Cocktail's</h3>
         <button onClick={grabCocktail}>Latest</button>
-        <button onClick={clearLatest}>Clear Latest</button>
+        {(latestDrinks.length !== 0) ? <button onClick={clearLatest}>Clear Latest</button> : <div></div>}
 
         <div>
           {latestDrinks.map((item, idx) => {
             return <LatestCocktailsMap item={item} key={idx} />;
           })}
         </div>
-        </div>
+        </StyledDiv>
     )
 }
 export default GrabLatest;
